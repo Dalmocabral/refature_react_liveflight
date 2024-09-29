@@ -1,0 +1,157 @@
+/* Estilo do container principal do sidebar */
+.session-info-sidebar {
+  background-color: #1f1f1f;
+  padding: 20px;
+  width: 300px;
+  max-height: 100vh;
+  overflow-y: auto; /* Permite scroll do mouse */
+  scrollbar-width: none; /* Oculta a barra de rolagem para navegadores compatíveis */
+  -ms-overflow-style: none; /* Oculta a barra de rolagem para navegadores baseados em IE e Edge */
+}
+
+/* Barra de rolagem personalizada para navegadores baseados em Webkit (Chrome, Safari) */
+.session-info-sidebar::-webkit-scrollbar {
+  width: 0px; /* Oculta a barra de rolagem */
+  background: transparent; /* Fundo transparente para garantir que a barra não apareça */
+}
+
+.session-info-sidebar::-webkit-scrollbar-track {
+  background: transparent; /* Fundo transparente para garantir que a barra não apareça */
+}
+
+.session-info-sidebar::-webkit-scrollbar-thumb {
+  background: transparent; /* Fundo transparente para garantir que a barra não apareça */
+}
+
+/* Cabeçalho do sidebar */
+.statistics-header {
+  background-color: #03459c;
+  padding: 15px;
+  text-align: center;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.statistics-header h3,
+.statistics-header p {
+  margin: 0;
+  color: white;
+}
+
+/* Nome da sessão */
+.name-session h4 {
+  margin: 0;
+  font-size: 20px;
+  color: #fff;
+  text-align: center;
+}
+
+/* Contagem de usuários na sessão */
+.session-count-user {
+  margin: 15px 0;
+  text-align: center;
+  color: #fff;
+}
+
+.session-count-user span {
+  color: #12a13b;
+  font-weight: bold;
+}
+
+/* Seção do gráfico de aeronaves populares */
+.chart-section {
+  margin: 20px 0;
+}
+
+.grafic-header h4 {
+  margin: 10px 0;
+  color: #fff;
+  text-align: center;
+}
+
+.chart-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 220px;
+}
+
+/* Seção de aeroportos populares */
+.statistics-section {
+  margin-bottom: 20px;
+}
+
+.statistics-section h4 {
+  margin: 0 0 10px 0;
+  font-size: 18px;
+  color: #fff;
+  text-align: center;
+}
+
+.airport-table-header,
+.airport-stat {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  background-color: #282828;
+  border-radius: 5px;
+  margin-bottom: 5px;
+  font-size: 14px;
+}
+
+.airport-table-header span {
+  color: #bbb;
+}
+
+.inbound {
+  flex: 1;
+  text-align: left;
+}
+
+.outbound {
+  flex: 1;
+  text-align: right;
+}
+
+.airport {
+  flex: 2;
+  text-align: center;
+  color: #fff;
+}
+
+/* Seção de status ATC */
+.statistics-section-atc h4 {
+  margin: 20px 0 10px 0;
+  font-size: 18px;
+  color: #fff;
+  text-align: center;
+}
+
+.statistics-section-atc ul {
+  list-style: none;
+  padding: 0;
+  overflow-x: auto; /* Permite rolar horizontalmente se necessário */
+}
+
+.statistics-section-atc ul li {
+  background-color: #282828;
+  margin-bottom: 5px;
+  padding: 10px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center; /* Centraliza verticalmente */
+  color: #fff;
+}
+
+.statistics-section-atc .airport {
+  text-align: left; /* Alinha o nome do aeroporto à esquerda */
+  flex: 1; /* Permite que o nome ocupe o espaço necessário */
+}
+
+.statistics-section-atc .atc-status {
+  display: flex;
+  gap: 5px; /* Espaçamento entre os rótulos ATC */
+  justify-content: flex-end; /* Alinha os rótulos ATC à direita */
+  flex: 1; /* Permite que os rótulos ocupem o espaço necessário */
+}

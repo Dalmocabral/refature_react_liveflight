@@ -1,0 +1,229 @@
+/* Estilos da sidebar principal */
+.session-info-sidebar {
+  position: absolute;
+  width: 300px;
+  height: 100%;
+  background: #1a1919;
+  z-index: 1;
+}
+
+/* Estilos da UserInfoSidebar */
+.user-info-sidebar {
+  position: absolute;
+  left: 0;
+  width: 300px;
+  height: 100%;
+  background: #1f1f1f;
+  z-index: 2;
+  overflow-y: auto; /* Permite scroll do mouse */
+  scrollbar-width: none; /* Oculta a barra de rolagem para navegadores compatíveis */
+  -ms-overflow-style: none; /* Oculta a barra de rolagem para navegadores baseados em IE e Edge */
+}
+
+/* Estilos para a imagem da Livery */
+.imageLivery {
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.imageLivery img {
+  
+  height: 200px; /* Defina a altura que desejar */
+  object-fit: cover;
+  display: block;
+  border-radius: 0;
+}
+
+/* Estilos para o callsign do usuário */
+.usercallsign {
+  background-color: #03459c;
+  padding: 10px;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  height: auto;
+  color: #FFF;
+}
+
+.circuloIcon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: #fff;
+  color: #000;
+  margin-right: 10px;
+  font-size: 24px;
+}
+
+/* Estilos para a rota do usuário */
+.userroute {
+  background-color: #1868d1;
+  padding: 10px;
+
+  height: auto;
+}
+
+.userroute span {
+  font-size: 20px;
+  color: #fff;
+}
+
+/* Estilos para o container de progresso */
+.progress-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #1868d1;
+  padding: 10px;
+  border-radius: 10px;
+  
+}
+
+.progress-bar {
+  flex-grow: 1;
+  height: 6px;
+  background-color: #333;
+  margin: 0 5px;
+  border-radius: 5px;
+  position: relative;
+}
+
+.progress {
+  background-color: #4caf50;
+  height: 100%;
+  border-radius: 5px;
+  position: relative;
+}
+
+.progress-icon {
+  color: #fff;
+  position: absolute;
+  top: -4px;
+  transform: translateX(-50%);
+}
+
+/* Estilos para informações do voo */
+.col-info-flight-user {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 0 10px;
+  color: #fff;
+}
+
+.info-box {
+  flex: 1;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: rgb(45, 45, 46);
+  text-align: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+  
+}
+
+.info-box span {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.info-box p {
+  font-size: 10px;
+  margin: 0;
+  color: #666;
+}
+
+.info-box-user {
+  flex: 1;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: rgb(110, 110, 240);
+  text-align: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+/* Estilos para a rota */
+.route-info-user {
+  margin-top: 20px;
+  padding: 10px;
+  background-color: rgb(45, 45, 46);
+  border-radius: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
+  color: #fff;
+}
+
+.waypoints-container {
+  margin-top: 10px;
+  font-size: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+
+}
+
+/* Estilos para o nome de usuário */
+.inforusername {
+  margin-top: 20px;
+  padding: 10px;
+  background-color: rgb(45, 45, 46);
+  border-radius: 10px;
+  text-align: center;
+  margin-bottom: 16px;
+  color: #fff;
+  
+}
+
+/* Estilos para ícones de streaming */
+.stream-icons {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 8px;
+  font-size: 30px;
+}
+
+.stream-icons a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.inforusername {
+  margin-top: 20px;
+  padding: 10px;
+  background-color: rgb(45, 45, 46); 
+  border-radius: 10px;
+  text-align: center;
+  margin-bottom: 0px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.stream-icons {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 8px;
+  font-size: 40px;
+}
+
+.stream-icons a {
+  color: inherit;
+  text-decoration: none;
+}

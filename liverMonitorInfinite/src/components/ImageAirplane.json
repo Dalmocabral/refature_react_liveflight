@@ -1,0 +1,229 @@
+[
+    {
+        "id": "",
+        "LiveryName": "ovni",        
+        "image": "https://i.ibb.co/xY27KSy/ovni-1-715x402.png"
+    },
+
+    {
+        "id": "643f687b-9553-4dd1-a98b-7932b6ec0529",
+        "LiveryName": "GOL - 2018",
+        "modelo": "Boeing 737-800",        
+        "image": "/src/assets/livery/B738/gol_2018.png"
+    },
+    {
+        "id": "0a3b5b5a-e646-42c0-9c9b-540d94715a58",
+        "LiveryName": "FedEx",
+        "modelo": "Cessna 208",        
+        "image": "/src/assets/livery/GE/C208/208_fedex.png"
+    },
+    {
+        "id": "f9474e48-f651-4d39-ab5e-4806339afd5c",
+        "LiveryName": "Avianca",
+        "modelo": "Airbus A320",        
+        "image": "/src/assets/livery/A320/avianca.png"
+    },
+    {
+        "id": "6cd046f4-ca62-4450-8b51-6cb68dc2f5a0",
+        "LiveryName": "GOL+",
+        "modelo": "Boeing 737-800",        
+        "image": "/src/assets/livery/B738/gol_mais.png"
+    },
+    {
+        "id": "9b8737c3-ee29-43ad-8fa4-7c2fed73ebc6",
+        "LiveryName": "ITA Transportes Aéreos",
+        "modelo": "Airbus A320",        
+        "image": "/src/assets/livery/A320/ita_transportes_ aereos.png"
+    },
+    {
+        "id": "8944ff81-f687-4d33-8717-b7252d2ab280",
+        "LiveryName": "Azul",
+        "modelo": "Airbus A330-900",        
+        "image": "/src/assets/livery/A339N/azul.png"
+    },
+    {
+        "id": "8aa8f0e5-2788-4724-95f7-b4b07830a4b3",
+        "LiveryName": "Charcoal",
+        "modelo": "TBM-930",        
+        "image": "/src/assets/livery/GE/TBM/tbm_Charcoal.png"
+    },
+    {
+        "id": "52e28897-9067-4a8b-8480-140489936e32",
+        "LiveryName": "Sansa",
+        "modelo": "Cessna 208",        
+        "image": "/src/assets/livery/GE/C208/208_sansa.png"
+    },
+    {
+        "id": "af0c5178-49fa-471d-a9b2-5ba4d3da3827",
+        "LiveryName": "Azul Cargo",
+        "modelo": "Cessna 208",        
+        "image": "/src/assets/livery/GE/C208/azul_cargo.png"
+    },
+    {
+        "id": "2ddb13a1-157c-4872-9f77-40cc92a4c5a7",
+        "LiveryName": "Generic",
+        "modelo": "Boeing 737-700",        
+        "image": "/src/assets/livery/B737/generic.png"
+    },
+    {
+        "id": "4ed9d53e-a879-4433-abc2-dd3ed5466617",
+        "LiveryName": "Air China",
+        "modelo": "Boeing 777-300ER",        
+        "image": "/src/assets/livery/B77w/air_china.png"
+    },
+    {
+        "id": "29947d52-a32a-4675-b04d-878fa2ac5476",
+        "LiveryName": "Azul",
+        "modelo": "Airbus A320",        
+        "image": "/src/assets/livery/A320/azul.png"
+    },
+    {
+        "id": "4f2bebb1-1fd8-444e-bf44-b42b88546a98",
+        "LiveryName": "Garuda Indonesia",
+        "modelo": "Boeing 777-300ER",        
+        "image": "/src/assets/livery/B77w/garuda_indonesia.png"
+    },
+    {
+        "id": "39d0ea03-5bf5-4ab0-8651-37bfe1e07205",
+        "LiveryName": "American Airlines",
+        "modelo": "Boeing 777-300ER",        
+        "image": "/src/assets/livery/B77w/american_airlines.png"
+    },
+    {
+        "id": "a6b6dfb8-1a54-45d3-8a9a-ea336e49add0",
+        "LiveryName": "Avianca",
+        "modelo": "Boeing 787-8",        
+        "image": "/src/assets/livery/B788/avianca.png"
+    },
+    {
+        "id": "e44843cc-dd66-473c-b40b-f0a45380e5f9",
+        "LiveryName": "LATAM",
+        "modelo": "Airbus A320",        
+        "image": "/src/assets/livery/A320/latam.png"
+    },
+    {
+        "id": "f8db8f7b-35ef-4d6a-9248-2bc5e5008d49",
+        "LiveryName": "LATAM",
+        "modelo": "Airbus A350",        
+        "image": "/src/assets/livery/A350_900/latam.png"
+    },
+    {
+        "id": "c177f0bf-f407-4322-bb0d-83884bbb0cdc",
+        "LiveryName": "United Airlines - 2019",
+        "modelo": "Boeing 787-9",        
+        "image": "/src/assets/livery/B789/united_airlines_2019.png"
+    },
+    {
+        "id": "d0074d2e-3394-4775-91d2-7bd634aebdcd",
+        "LiveryName": "LATAM",
+        "modelo": "Airbus A319",        
+        "image": "/src/assets/livery/A319/latam.png"
+    },
+    {
+        "id": "01c94477-768e-47db-8adc-fb4e0b2d3d52",
+        "LiveryName": "LATAM",
+        "modelo": "Boeing 777-300ER",        
+        "image": "/src/assets/livery/B77W/latam.png"
+    },
+    {
+        "id": "32becef6-0e00-4fdd-8e78-98996009ad53",
+        "LiveryName": "LATAM",
+        "modelo": "Airbus A321",        
+        "image": "/src/assets/livery/A321/latam.png"
+    },
+    {
+        "id": "c0af9dbd-5b75-4da9-a3fb-4766427c342e",
+        "LiveryName": "Challenger 350",
+        "modelo": "Catreus Aviation",        
+        "image": "/src/assets/livery/GE/Bombardier/challenger_350.png"
+    },
+    {
+        "id": "43cd322a-8b34-4879-8c62-5dbdcc9dc541",
+        "LiveryName": "Emirates - 1999",
+        "modelo": "Airbus A380",        
+        "image": "/src/assets/livery/A380/emirates_1999.png"
+    },
+    {
+        "id": "5fa22d06-1d44-46e4-b797-6c254b23cbfc",
+        "LiveryName": "TAP",
+        "modelo": "Airbus A330-900",        
+        "image": "/src/assets/livery/A339N/tap.png"
+    },
+    {
+        "id": "ae39a8c3-e027-41b6-ad43-264a81baaea3",
+        "LiveryName": "Air France (2019)",
+        "modelo": "Boeing 777-300ER",        
+        "image": "/src/assets/livery/B77W/air_france_2019.png"
+    },
+    {
+        "id": "99430457-aa53-407e-adbc-bfba6fc30d2c",
+        "LiveryName": "Generic",
+        "modelo": "Airbus A320",        
+        "image": "/src/assets/livery/A320/generic.png"
+    },
+    {
+        "id": "aafa295c-0584-4683-b880-ac87759785b8",
+        "LiveryName": "Qatar Airways",
+        "modelo": "Boeing 777-200LR",        
+        "image": "/src/assets/livery/772LR/qatar_airline.png"
+    },
+    {
+        "id": "19da5b49-4a06-4e19-ac73-6304a0c50c5b",
+        "LiveryName": "ExecuJet",
+        "modelo": "Challenger 350",        
+        "image": "/src/assets/livery/GE/Bombardier/execujet.png"
+    },
+    {
+        "id": "f1122b9b-f4a8-4543-b83f-7d7faef56a3c",
+        "LiveryName": "Azul Conecta",
+        "modelo": "Cessna 208",        
+        "image": "/src/assets/livery/GE/C208/azul_conecta.png"
+    },
+    {
+        "id": "762e9d72-94e7-4a16-8c1f-85dcf562598d",
+        "LiveryName": "Azul",
+        "modelo": "Airbus A350",        
+        "image": "/src/assets/livery/A350_900/azul.png"
+    },
+    {
+        "id": "e9107e81-6473-4b92-8a8d-b95b5aa782fb",
+        "LiveryName": "Gol-2019",
+        "modelo": "Boeing 737-700",        
+        "image": "/src/assets/livery/B737/gol_2019.png"
+    },
+    {
+        "id": "959d0b4b-5bef-4f34-a6a0-3cb91ff66181",
+        "LiveryName": "Safarilink",
+        "modelo": "Cessna 208",        
+        "image": "/src/assets/livery/GE/C208/safarilink.png"
+    },
+    {
+        "id": "34488fc3-07f5-495e-89eb-97702b3ace7a",
+        "LiveryName": "gol",
+        "modelo": "Boeing 737-700",        
+        "image": "/src/assets/livery/B737/gol.png"
+    },
+    {
+        "id": "7ea21653-200a-4b3d-b1e3-c986cca14929",
+        "LiveryName": "Emirates",
+        "modelo": "Boeing 777-300ER",        
+        "image": "/src/assets/livery/B77W/emirates.png"
+    },
+    {
+        "id": "a1a53d68-462a-4a4a-afe2-02361297f048",
+        "LiveryName": "Aerolíneas Argentinas",
+        "modelo": "Boeing 737-800",        
+        "image": "/src/assets/livery/B738/aerolineas_argentinas.png"
+    },
+    {
+        "id": "8ee511ab-7111-48e0-bd15-ca166f43be59",
+        "LiveryName": "Delta Air Lines",
+        "modelo": "Airbus A350",        
+        "image": "/src/assets/livery/A350_900/delta.png"
+    }
+    
+    
+    
+    
+]
+
