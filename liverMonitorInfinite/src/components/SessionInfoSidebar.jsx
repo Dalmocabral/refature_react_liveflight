@@ -106,7 +106,7 @@ const SessionInfoSidebar = ({ sessionName, sessionId }) => {
     <div className="session-info-sidebar">
       <div className="statistics-header">
         <h3>Infinite Monitor Live</h3>
-        <p>1.0v Alpha</p>
+        <p>1.1.0v Alpha</p>
       </div>
       <div className="name-session">
         <h4>{sessionName}</h4>
