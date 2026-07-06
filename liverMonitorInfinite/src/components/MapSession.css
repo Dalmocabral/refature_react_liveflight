@@ -306,10 +306,8 @@ html, body {
     font-size: 11px;
     font-weight: bold;
     text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
-    background-image: url('../assets/airplane.png');
-    background-size: cover;
-    width: 30px;
-    height: 30px;
+    white-space: nowrap;
+    pointer-events: none;
   }
   
   .va-airplane-icon {

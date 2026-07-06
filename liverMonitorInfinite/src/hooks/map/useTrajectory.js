@@ -137,7 +137,7 @@ export const useTrajectory = (map, sessionId, selectedFlightId, flightsData) => 
                       },
                       paint: {
                           'line-width': 6,
-                          'line-color': '#000000',
+                          'line-color': '#808080',
                           'line-opacity': 0.8
                       }
                   });
