@@ -2069,7 +2069,7 @@
         "image": "/liveries/a330900neo_citilink.webp"
     },
     {
-        "id": "c2a3e267-112f-4e4e-86fb-1ed94200467e",
+        "id": "920f88d5-17f6-494e-91c5-9cd185f61ab6",
         "LiveryName": "Condor",
         "modelo": "A330-900neo",
         "image": "/liveries/a330900neo_condor.webp"
@@ -2513,7 +2513,7 @@
         "image": "/liveries/a380800_asianaairlines.webp"
     },
     {
-        "id": "316acb70-b926-4dd2-9d6f-8ce7c5c6b6f9",
+        "id": "0cb88e15-2848-4510-8f3f-3046ea3b22fa",
         "LiveryName": "British Airways",
         "modelo": "A380-800",
         "image": "/liveries/a380800_britishairways.webp"
@@ -2543,7 +2543,7 @@
         "image": "/liveries/a380800_emirates50thanniversary.webp"
     },
     {
-        "id": "316acb70-b926-4dd2-9d6f-8ce7c5c6b6f9",
+        "id": "2b5609fa-0d67-48c4-bc35-82db3ffce594",
         "LiveryName": "Etihad Airways",
         "modelo": "A380-800",
         "image": "/liveries/a380800_etihadairways.webp"
@@ -2615,7 +2615,7 @@
         "image": "/liveries/a380800_qantas.webp"
     },
     {
-        "id": "6a895397-9918-4e5f-b8a5-ada34263480d",
+        "id": "b5f99762-08fa-473f-8877-27361bd9e91e",
         "LiveryName": "Qatar Airways",
         "modelo": "A380-800",
         "image": "/liveries/a380800_qatarairways.webp"
@@ -5105,7 +5105,7 @@
         "image": "/liveries/7879dreamliner_britishairways.webp"
     },
     {
-        "id": "4ddfdfe0-4777-47f7-bcde-65d8d39cfe7b",
+        "id": "93f8529e-a992-4c81-b32d-a64e44f8c0e3",
         "LiveryName": "Etihad Airways",
         "modelo": "787-9 Dreamliner",
         "image": "/liveries/7879dreamliner_etihadairways.webp"
@@ -5147,7 +5147,7 @@
         "image": "/liveries/7879dreamliner_juneyaoair.webp"
     },
     {
-        "id": "169ece6a-d778-481b-867f-4ea4743b68c4",
+        "id": "ca30b4a7-10fc-4a23-a00e-e56862db9975",
         "LiveryName": "KLM (2014)",
         "modelo": "787-9 Dreamliner",
         "image": "/liveries/7879dreamliner_klm2014.webp"
