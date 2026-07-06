@@ -6,16 +6,18 @@ import {
     DialogActions,
     DialogContent,
     DialogTitle,
-    TextField
+    TextField,
+    Switch,
+    FormControlLabel
 } from "@mui/material";
 import { useEffect, useMemo, useState } from "react";
 import { DEFAULT_COLORS } from "../utils/iconTemplates";
 
 const SettingsDialog = ({ open, onClose, flightsData }) => {
-  // Estado para os dados do formulário
   const [formData, setFormData] = useState({
     formUsername: "",
     vaVo: "",
+    showLabelsOnZoom: true,
     ...DEFAULT_COLORS // Initialize from shared defaults
   });
 
@@ -150,6 +152,19 @@ const SettingsDialog = ({ open, onClose, flightsData }) => {
                     FormHelperTextProps={{ style: { color: '#777' } }}
                 />
             )}
+        />
+        
+        <FormControlLabel
+            control={
+                <Switch 
+                    checked={formData.showLabelsOnZoom !== false} 
+                    onChange={handleChange} 
+                    name="showLabelsOnZoom" 
+                    color="primary"
+                />
+            }
+            label={<span style={{ color: '#fff' }}>Show Labels on Zoom</span>}
+            style={{ marginTop: '15px' }}
         />
         
         {/* Color Settings */}

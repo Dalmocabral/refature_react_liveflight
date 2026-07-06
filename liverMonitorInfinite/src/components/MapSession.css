@@ -296,4 +296,218 @@ html, body {
     height: 30px;
   }
 
+  .aircraft-label {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--label-color, #ffffff);
+    font-size: 11px;
+    font-weight: bold;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+    background-image: url('../assets/airplane.png');
+    background-size: cover;
+    width: 30px;
+    height: 30px;
+  }
+  
+  .va-airplane-icon {
+    background-image: url('../assets/airplane_va_vo.png');
+    background-size: cover;
+    width: 30px;
+    height: 30px;
+  }
+  
+  .online-airplane-icon {
+    background-image: url('../assets/airplane_stremer.png'); /* Ícone para usuários online */
+    background-size: cover;
+    width: 30px;
+    height: 30px;
+  }
+  
+  .staff-airplane-icon {
+    background-image: url('../assets/airplane_staff.png'); /* Ícone para usuários staff */
+    background-size: cover;
+    width: 30px;
+    height: 30px;
+  }
 
+  .username-large {
+    font-size: 1.5rem; /* Tamanho da fonte - ajuste conforme necessário */
+    font-weight: bold; /* Deixa o texto em negrito */
+    
+  }
+
+  .custom-aircraft-icon {
+    background-image: url('../assets/C172.svg'); /* Ícone para usuários staff */
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 25px;
+    height: 25px;
+    transform-origin: center center;
+    display: inline-block;
+  }
+
+  .santa-marker-icon {
+      width: 100px; /* Bigger than planes */
+      height: 100px;
+      /* Use Sleigh/Staff image as base */
+      background-image: url('../assets/papainoel.png'); 
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+      /* Ensure rotation works around center */
+      transform-origin: center center;
+      z-index: 1000; /* On top of planes */
+      cursor: pointer;
+  }
+
+.large-aircraft-icon {
+    background-image: url('../assets/B77W.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 40px;
+    height: 40px;
+    transform-origin: center center;
+    display: inline-block;
+}
+
+  .fighter-aircraft-icon {
+    background-image: url('../assets/04.png');
+    background-size: contain;
+    width:24px; /* Slightly smaller/agile look */
+    height: 24px;
+  }
+
+  /* Staff Variants */
+  .staff-ge-icon {
+    background-image: url('../assets/C172_Staff.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 25px;
+    height: 25px;
+    transform-origin: center center;
+    display: inline-block;
+  }
+
+  .staff-medium-icon {
+    background-image: url('../assets/A320_Staff.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 70px;
+    height: 70px;
+    transform-origin: center center;
+    display: inline-block;
+  }
+
+  .staff-large-icon {
+    background-image: url('../assets/B77W_Staff.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 40px;
+    height: 40px;
+    transform-origin: center center;
+    display: inline-block;
+  }
+
+  /* VA Variants (#7c0eea) */
+  .va-ge-icon {
+    background-image: url('../assets/C172_VA.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 40px;
+    height: 40px;
+    transform-origin: center center;
+    display: inline-block;
+  }
+
+  .va-medium-icon {
+    background-image: url('../assets/A320_VA.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 70px;
+    height: 70px;
+    transform-origin: center center;
+    display: inline-block;
+  }
+
+  .va-large-icon {
+    background-image: url('../assets/B77W_VA.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 40px;
+    height: 40px;
+    transform-origin: center center;
+    display: inline-block;
+  }
+
+  /* IFC Variants (#eac51c) */
+  .ifc-ge-icon {
+    background-image: url('../assets/C172_IFC.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 40px;
+    height: 40px;
+    transform-origin: center center;
+    display: inline-block;
+  }
+
+  .ifc-medium-icon {
+    background-image: url('../assets/A320_IFC.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 70px;
+    height: 70px;
+    transform-origin: center center;
+    display: inline-block;
+  }
+
+  .ifc-large-icon {
+    background-image: url('../assets/B77W_IFC.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 70px;
+    height: 70px;
+    transform-origin: center center;
+    display: inline-block;
+  }
+
+  .military-cargo-icon {
+    background-image: url('../assets/A400.png');
+    background-size: contain;
+    width: 30px; /* Distinct styling */
+    height: 30px;
+  }
+
+  .aircraft-label {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--label-color, #ffffff);
+    font-size: 11px;
+    font-weight: bold;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+    white-space: nowrap;
+    pointer-events: none;
+    margin-top: 2px;
+  }
+
+  .show-aircraft-labels .aircraft-label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }

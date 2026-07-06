@@ -7,6 +7,7 @@ import "./SidebarMenu.css";
 
 import { useAtc } from '../hooks/useAtc';
 import { useFlights } from '../hooks/useFlights';
+import { useEvents } from '../hooks/useEvents';
 import SidebarSkeleton from './SidebarSkeleton';
 
 const SessionInfoSidebar = ({ sessionName, sessionId, onAirportSelect }) => {
@@ -16,6 +17,7 @@ const SessionInfoSidebar = ({ sessionName, sessionId, onAirportSelect }) => {
   // Hooks
   const { data: flightData, isLoading: isLoadingFlights } = useFlights(sessionId);
   const { data: atcData, isLoading: isLoadingAtc } = useAtc(sessionId);
+  const { events, isLoading: isLoadingEvents } = useEvents();
 
   // Estados derivados (poderiam ser memoized, mas useEffect é ok para manter estrutura se preferir, ou melhor: useMemo)
   const [aircraftData, setAircraftData] = useState([]);
@@ -102,6 +104,31 @@ const SessionInfoSidebar = ({ sessionName, sessionId, onAirportSelect }) => {
     }
     return acc;
   }, {});
+
+  const formatEventDate = (startStr, endStr) => {
+    const start = new Date(startStr);
+    const end = endStr ? new Date(endStr) : null;
+    
+    const months = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
+    const startDay = String(start.getUTCDate()).padStart(2, '0');
+    const startMonth = months[start.getUTCMonth()];
+    
+    const startHour = String(start.getUTCHours()).padStart(2, '0');
+    const startMin = String(start.getUTCMinutes()).padStart(2, '0');
+    
+    if (!endStr) return `${startDay}${startMonth} • All day`;
+    
+    const endDay = String(end.getUTCDate()).padStart(2, '0');
+    const endMonth = months[end.getUTCMonth()];
+    const endHour = String(end.getUTCHours()).padStart(2, '0');
+    const endMin = String(end.getUTCMinutes()).padStart(2, '0');
+    
+    if (startDay === endDay && startMonth === endMonth) {
+       return `${startDay}${startMonth} ${startHour}:${startMin}-${endHour}:${endMin}Z`;
+    }
+    
+    return `${startDay}${startMonth} ${startHour}:${startMin}Z - ${endDay}${endMonth} ${endHour}:${endMin}Z`;
+  };
 
   return (
     <div className="session-info-sidebar">
@@ -208,6 +235,31 @@ const SessionInfoSidebar = ({ sessionName, sessionId, onAirportSelect }) => {
             </li>
           ))}
         </ul>
+      </div>
+
+      {/* Seção de Eventos / Events Section */}
+      <div className="statistics-section-events">
+        <h4>Events <span className="events-count">{events.length}</span></h4>
+        {isLoadingEvents ? (
+            <p style={{ padding: '0 15px', color: '#aaa', fontSize: '0.9rem' }}>Loading events...</p>
+        ) : (
+            <div className="events-list">
+              {events.map((event) => (
+                <div key={event.id} className="event-item" onClick={() => window.open(event.url, '_blank')}>
+                  <div className="event-meta">
+                    <span className="event-date">{formatEventDate(event.startsAt, event.endsAt)}</span>
+                    <div className="event-tags">
+                      {event.tags.some(t => t.includes('expert')) && <span className="badge-expert">EXPERT</span>}
+                      {event.tags.some(t => t.includes('training')) && <span className="badge-training">TRAINING</span>}
+                      {event.tags.some(t => t.includes('casual')) && <span className="badge-casual">CASUAL</span>}
+                      <span className="event-link-icon">↗</span>
+                    </div>
+                  </div>
+                  <div className="event-title">{event.title}</div>
+                </div>
+              ))}
+            </div>
+        )}
       </div>
     </div>
   );

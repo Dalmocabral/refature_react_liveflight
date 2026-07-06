@@ -59,39 +59,90 @@ export const useTrajectory = (map, sessionId, selectedFlightId, flightsData) => 
                   latitude: unwrapped[i][1]
               }));
   
-              for (let i = 0; i < allPoints.length - 1; i++) {
-                  const start = allPoints[i];
-                  const end = allPoints[i+1];
+              const coordinates = allPoints.map(p => [p.longitude, p.latitude]);
+              
+              // Calculate distances for line-progress
+              const dists = [0];
+              let totalDist = 0;
+              const calcDist = (p1, p2) => Math.sqrt(Math.pow(p2[0]-p1[0], 2) + Math.pow(p2[1]-p1[1], 2));
+              
+              for (let i = 1; i < coordinates.length; i++) {
+                  const d = calcDist(coordinates[i-1], coordinates[i]);
+                  totalDist += d;
+                  dists.push(totalDist);
+              }
+
+              const gradientParams = [
+                  'interpolate',
+                  ['linear'],
+                  ['line-progress']
+              ];
+
+              let lastProgress = -1;
+              for (let i = 0; i < allPoints.length; i++) {
+                  let progress = totalDist > 0 ? dists[i] / totalDist : 0;
+                  // Ensure strictly increasing keys
+                  if (progress <= lastProgress) {
+                      progress = lastProgress + 0.000001; 
+                  }
+                  if (progress > 1) progress = 1;
                   
-                  segments.push({
+                  if (progress > lastProgress) {
+                      gradientParams.push(progress);
+                      gradientParams.push(getColorFromAltitude(allPoints[i].altitude));
+                      lastProgress = progress;
+                  }
+              }
+
+              // Fallback if no valid points for gradient
+              if (gradientParams.length < 5) {
+                  gradientParams.push(0, getColorFromAltitude(0), 1, getColorFromAltitude(0));
+              }
+
+              const geoJson = {
+                  type: 'FeatureCollection',
+                  features: [{
                       type: 'Feature',
                       geometry: {
                           type: 'LineString',
-                          coordinates: [[start.longitude, start.latitude], [end.longitude, end.latitude]]
-                      },
-                      properties: {
-                          color: getColorFromAltitude(start.altitude)
+                          coordinates: coordinates
                       }
-                  });
-              }
+                  }]
+              };
   
               const routeSourceId = 'flight-history-source';
               const routeLayerId = 'flight-history-layer';
+              const casingLayerId = 'flight-history-casing-layer';
               
               if (map.current.getSource(routeSourceId)) {
-                   map.current.getSource(routeSourceId).setData({
-                      type: 'FeatureCollection',
-                      features: segments
-                   });
+                   map.current.getSource(routeSourceId).setData(geoJson);
+                   if (map.current.getLayer(routeLayerId)) {
+                       map.current.setPaintProperty(routeLayerId, 'line-gradient', gradientParams);
+                   }
               } else {
                   map.current.addSource(routeSourceId, {
                       type: 'geojson',
-                      data: {
-                          type: 'FeatureCollection',
-                          features: segments
-                      }
+                      data: geoJson,
+                      lineMetrics: true
                   });
   
+                  // Casing layer
+                  map.current.addLayer({
+                      id: casingLayerId,
+                      type: 'line',
+                      source: routeSourceId,
+                      layout: {
+                          'line-join': 'round',
+                          'line-cap': 'round'
+                      },
+                      paint: {
+                          'line-width': 6,
+                          'line-color': '#000000',
+                          'line-opacity': 0.8
+                      }
+                  });
+
+                  // Gradient layer
                   map.current.addLayer({
                       id: routeLayerId,
                       type: 'line',
@@ -101,12 +152,19 @@ export const useTrajectory = (map, sessionId, selectedFlightId, flightsData) => 
                           'line-cap': 'round'
                       },
                       paint: {
-                          'line-color': ['get', 'color'],
-                          'line-width': 3
+                          'line-width': 3,
+                          'line-gradient': gradientParams
                       }
                   });
-                  currentPolylineRef.current = [routeLayerId];
               }
+
+              // Ensure correct z-index ordering
+              if (map.current.getLayer(casingLayerId)) map.current.moveLayer(casingLayerId);
+              if (map.current.getLayer(routeLayerId)) map.current.moveLayer(routeLayerId);
+              if (map.current.getLayer('flight-plan-waypoints-layer')) map.current.moveLayer('flight-plan-waypoints-layer');
+              if (map.current.getLayer('flight-plan-markers-layer')) map.current.moveLayer('flight-plan-markers-layer');
+
+              currentPolylineRef.current = [casingLayerId, routeLayerId];
           }
         } catch (error) {
             console.error("Error updating trajectory:", error);
@@ -128,13 +186,13 @@ export const useTrajectory = (map, sessionId, selectedFlightId, flightsData) => 
                 if (lastFeature.geometry.type === 'LineString') {
                     const coords = lastFeature.geometry.coordinates;
                     if (coords.length >= 2) {
-                        const startLng = coords[0][0];
+                        const startLng = coords[coords.length - 2][0];
                         let newLng = lng;
                         let diff = newLng - startLng;
                         if (diff > 180) newLng -= 360;
                         else if (diff < -180) newLng += 360;
                         
-                        lastFeature.geometry.coordinates = [coords[0], [newLng, lat]];
+                        coords[coords.length - 1] = [newLng, lat];
                         source.setData(data);
                     }
                 }

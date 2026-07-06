@@ -34,8 +34,32 @@ export const useMap = (mapContainer) => {
             const navControl = new NavigationControl();
             map.current.addControl(navControl, 'bottom-right');
 
+            // Handle labels on zoom
+            const updateLabelsVisibility = () => {
+                if (!mapContainer.current) return;
+                const zoom = map.current.getZoom();
+                
+                const savedData = localStorage.getItem("userFormData");
+                let showLabels = true;
+                if (savedData) {
+                    try {
+                        const parsed = JSON.parse(savedData);
+                        if (parsed.showLabelsOnZoom !== undefined) showLabels = parsed.showLabelsOnZoom;
+                    } catch(e) {}
+                }
+                
+                if (showLabels && zoom >= 4.5) {
+                    mapContainer.current.classList.add('show-aircraft-labels');
+                } else {
+                    mapContainer.current.classList.remove('show-aircraft-labels');
+                }
+            };
+            
+            map.current.on('zoom', updateLabelsVisibility);
+
             map.current.on('load', () => {
                 setIsMapLoaded(true);
+                updateLabelsVisibility();
             });
         }
     }, [mapContainer]);

@@ -11,7 +11,10 @@ export const useAircraftDefinitions = () => {
       const definitions = {};
       
       aircraftList.forEach(aircraft => {
-        definitions[aircraft.id] = categorizeAircraft(aircraft.name);
+        definitions[aircraft.id] = {
+            category: categorizeAircraft(aircraft.name),
+            name: aircraft.name
+        };
       });
       
       return definitions;

@@ -4,14 +4,16 @@ import staffData from '../../components/staff.json';
 import stremerData from '../../components/Stremer.json';
 import { DEFAULT_COLORS, getIconUrl } from '../../utils/iconTemplates';
 import { useAircraftDefinitions } from '../useAircraftDefinitions';
+import { useAirplaneLogos } from '../useAirplaneLogos';
 
 export const useAircraftMarkers = (map, flightsData, onIconClick, savedUsername, savedVAName, savedColors, removePolylines, setSelectedFlightId, updateTrajectory, onMarkerUpdate) => {
     const markers = useRef({});
     const flightsRef = useRef(new Map()); 
     const animationFrameRef = useRef();
 
-    // Fetch Aircraft Definitions
+    // Fetch Aircraft Definitions and Logos
     const { data: aircraftDefinitions } = useAircraftDefinitions();
+    const { data: airplaneLogos } = useAirplaneLogos();
     
     // Merge colors
     const userColors = { ...DEFAULT_COLORS, ...savedColors };
@@ -67,7 +69,9 @@ export const useAircraftMarkers = (map, flightsData, onIconClick, savedUsername,
                 const streamer = stremerData.find(st => st.username === username);
                 const isStaff = staffData.some(staff => staff.username === username);
                 
-                const category = aircraftDefinitions ? aircraftDefinitions[aircraftId] : 'Medium'; 
+                const aircraftDef = aircraftDefinitions ? aircraftDefinitions[aircraftId] : null;
+                const category = aircraftDef ? aircraftDef.category : 'Medium'; 
+                const aircraftModelName = aircraftDef ? aircraftDef.name : 'Unknown'; 
 
                 // Determine Icon Type and Base Color
                 let iconType = 'A320'; 
@@ -117,7 +121,20 @@ export const useAircraftMarkers = (map, flightsData, onIconClick, savedUsername,
                 el.style.backgroundRepeat = 'no-repeat';
                 el.style.backgroundPosition = 'center';
 
+                // Add label container
+                const label = document.createElement('div');
+                label.className = 'aircraft-label';
+
+                // Add Model Text
+                const span = document.createElement('span');
+                span.innerText = aircraftModelName;
+                label.appendChild(span);
+                
+                label.style.setProperty('--label-color', iconColor);
+                el.appendChild(label);
+
                 // Interaction
+                el.style.cursor = 'pointer'; // Mãozinha apontando (pointer)
                 el.addEventListener('click', (e) => {
                     e.stopPropagation();
                     if (removePolylines) removePolylines();
@@ -149,7 +166,34 @@ export const useAircraftMarkers = (map, flightsData, onIconClick, savedUsername,
             }
         }
 
-    }, [flightsData, onIconClick, map, savedUsername, savedVAName, savedColors, removePolylines, setSelectedFlightId, updateTrajectory]);
+    }, [flightsData, onIconClick, map, savedUsername, savedVAName, savedColors, removePolylines, setSelectedFlightId, updateTrajectory, aircraftDefinitions]);
+
+    // Handle Logo Loading Asynchronously
+    useEffect(() => {
+        if (!airplaneLogos || !airplaneLogos.length || !flightsData) return;
+        
+        flightsData.forEach(flight => {
+            const marker = markers.current[flight.flightId];
+            if (marker) {
+                const el = marker.getElement();
+                if (el.dataset.logoLoaded === 'true') return;
+                
+                const labelContainer = el.querySelector('.aircraft-label');
+                if (labelContainer) {
+                    const matchingLogo = airplaneLogos.find(logo => logo.LiveryId === flight.liveryId);
+                    if (matchingLogo && matchingLogo.Logo) {
+                        const img = document.createElement('img');
+                        img.src = matchingLogo.Logo;
+                        img.style.height = '15px';
+                        img.style.marginRight = '4px';
+                        img.style.objectFit = 'contain';
+                        labelContainer.insertBefore(img, labelContainer.firstChild);
+                    }
+                    el.dataset.logoLoaded = 'true';
+                }
+            }
+        });
+    }, [airplaneLogos, flightsData]);
 
     // 2. Animation Loop
     const animate = () => {
@@ -170,6 +214,12 @@ export const useAircraftMarkers = (map, flightsData, onIconClick, savedUsername,
 
             marker.setLngLat([lng, lat]);
             marker.setRotation(data.heading);
+
+            // Counter-rotate the label so it stays horizontal
+            const label = marker.getElement().querySelector('.aircraft-label');
+            if (label) {
+                label.style.transform = `translateX(-50%) rotate(${-data.heading}deg)`;
+            }
             
             if (onMarkerUpdate) {
                 onMarkerUpdate(flightId, lng, lat);

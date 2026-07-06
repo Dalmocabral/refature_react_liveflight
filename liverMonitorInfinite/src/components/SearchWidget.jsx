@@ -78,7 +78,7 @@ const SearchWidget = ({ flightsData, onFlightSelect }) => {
                  const found = aircraftDefs.find(a => a.id === id);
                  return found ? found.name : id;
              }
-             if (aircraftDefs[id]) return aircraftDefs[id];
+             if (aircraftDefs[id]) return aircraftDefs[id].name;
         }
         return id; 
     };

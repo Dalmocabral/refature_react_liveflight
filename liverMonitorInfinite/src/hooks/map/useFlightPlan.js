@@ -2,12 +2,26 @@ import { useEffect, useRef } from 'react';
 import ApiService from '../../components/ApiService';
 import departureImg from '../../assets/departure.png';
 import arrivalImg from '../../assets/arrival.png';
+import maplibregl from 'maplibre-gl';
 
 export const useFlightPlan = (map, sessionId, selectedFlightId) => {
     const currentLayerId = useRef('flight-plan-layer');
     const currentSourceId = useRef('flight-plan-source');
     const markerSourceId = useRef('flight-plan-markers-source');
     const markerLayerId = useRef('flight-plan-markers-layer');
+    const wpSourceId = useRef('flight-plan-waypoints-source');
+    const wpLayerId = useRef('flight-plan-waypoints-layer');
+    const popupRef = useRef(null);
+
+    useEffect(() => {
+        if (!popupRef.current) {
+            popupRef.current = new maplibregl.Popup({
+                closeButton: false,
+                closeOnClick: false,
+                offset: 10
+            });
+        }
+    }, []);
     const ensureImagesLoaded = async () => {
         if (!map.current) return;
         const loadImagePromise = (url, id) => {
@@ -31,9 +45,12 @@ export const useFlightPlan = (map, sessionId, selectedFlightId) => {
             });
         };
 
+        const triangleSvg = 'data:image/svg+xml;charset=utf-8,<svg width="14" height="14" viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg"><polygon points="7,1 13,13 1,13" fill="transparent" stroke="%23000000" stroke-width="1.5"/></svg>';
+
         await Promise.all([
             loadImagePromise(departureImg, 'departure-icon'),
-            loadImagePromise(arrivalImg, 'arrival-icon')
+            loadImagePromise(arrivalImg, 'arrival-icon'),
+            loadImagePromise(triangleSvg, 'waypoint-triangle')
         ]);
     };
 
@@ -71,13 +88,35 @@ export const useFlightPlan = (map, sessionId, selectedFlightId) => {
                 if (items.length < 2) return;
 
                 // Extract coordinates [lng, lat] and filter out Null Island (0,0)
-                const rawPoints = items
-                    .map(item => [item.location.longitude, item.location.latitude])
-                    .filter(p => !(p[0] === 0 && p[1] === 0)); // Remove [0,0] points
+                const flattenedItems = [];
+                items.forEach(item => {
+                    if (item.children && item.children.length > 0) {
+                        flattenedItems.push(...item.children);
+                    } else {
+                        flattenedItems.push(item);
+                    }
+                });
+
+                const validItems = flattenedItems.filter(item => !(item.location.longitude === 0 && item.location.latitude === 0));
+                const rawPoints = validItems.map(item => [item.location.longitude, item.location.latitude]);
                 
                 if (rawPoints.length < 2) return;
                 
                 const coordinates = unwrapCoordinates(rawPoints);
+
+                const waypointFeatures = [];
+                for (let i = 1; i < coordinates.length - 1; i++) {
+                    const name = validItems[i].name || validItems[i].identifier || 'Waypoint';
+                    waypointFeatures.push({
+                        type: 'Feature',
+                        geometry: { type: 'Point', coordinates: coordinates[i] },
+                        properties: { name: name }
+                    });
+                }
+                const waypointsGeoJson = {
+                    type: 'FeatureCollection',
+                    features: waypointFeatures
+                };
 
                 const geoJson = {
                     type: 'FeatureCollection',
@@ -110,10 +149,10 @@ export const useFlightPlan = (map, sessionId, selectedFlightId) => {
                             'line-cap': 'round'
                         },
                         paint: {
-                            'line-color': '#000000', // Black
-                            'line-width': 3,
-                            'line-dasharray': [2, 3], // Dotted pattern
-                            'line-opacity': 0.5 // Dimmed
+                            'line-color': '#e67e22', // Orange
+                            'line-width': 2.5,
+                            'line-dasharray': [3, 2], // Dashed pattern
+                            'line-opacity': 0.8
                         }
                     });
                 }
@@ -163,6 +202,51 @@ export const useFlightPlan = (map, sessionId, selectedFlightId) => {
                         }
                     });
                 }
+
+                const wSourceId = wpSourceId.current;
+                const wLayerId = wpLayerId.current;
+
+                if (map.current.getSource(wSourceId)) {
+                    map.current.getSource(wSourceId).setData(waypointsGeoJson);
+                } else {
+                    map.current.addSource(wSourceId, {
+                        type: 'geojson',
+                        data: waypointsGeoJson
+                    });
+
+                    map.current.addLayer({
+                        id: wLayerId,
+                        type: 'symbol',
+                        source: wSourceId,
+                        layout: {
+                            'icon-image': 'waypoint-triangle',
+                            'icon-size': 0.8,
+                            'icon-allow-overlap': true,
+                            'icon-ignore-placement': true
+                        }
+                    });
+
+                    map.current.on('mouseenter', wLayerId, (e) => {
+                        map.current.getCanvas().style.cursor = 'pointer';
+                        const coords = e.features[0].geometry.coordinates.slice();
+                        const name = e.features[0].properties.name;
+                        
+                        while (Math.abs(e.lngLat.lng - coords[0]) > 180) {
+                            coords[0] += e.lngLat.lng > coords[0] ? 360 : -360;
+                        }
+                        
+                        if (popupRef.current) {
+                            popupRef.current.setLngLat(coords)
+                                .setHTML(`<div style="color: black; font-weight: bold; font-family: sans-serif; font-size: 12px; padding: 2px;">${name}</div>`)
+                                .addTo(map.current);
+                        }
+                    });
+
+                    map.current.on('mouseleave', wLayerId, () => {
+                        map.current.getCanvas().style.cursor = '';
+                        if (popupRef.current) popupRef.current.remove();
+                    });
+                }
             }
         } catch (error) {
             console.warn("Error fetching flight plan:", error);
@@ -190,6 +274,18 @@ export const useFlightPlan = (map, sessionId, selectedFlightId) => {
         if (map.current.getSource(mSourceId)) {
             map.current.removeSource(mSourceId);
         }
+
+        const wLayerId = wpLayerId.current;
+        const wSourceId = wpSourceId.current;
+
+        if (map.current.getLayer(wLayerId)) {
+            map.current.removeLayer(wLayerId);
+        }
+        if (map.current.getSource(wSourceId)) {
+            map.current.removeSource(wSourceId);
+        }
+        
+        if (popupRef.current) popupRef.current.remove();
     };
 
     // Effect to update when selection changes
